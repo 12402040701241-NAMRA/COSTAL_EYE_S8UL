@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coastal Threat Alert System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🌊</span>
+                    <span class="logo-text">CoastalGuard</span>
+                </div>
+                <div class="header-controls">
+                    <div class="live-indicator">
+                        <div class="live-dot"></div>
+                        <span>LIVE</span>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle">🌙</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+        <div class="container">
+            <div class="tab-list">
+                <button class="tab-btn active" data-tab="dashboard">
+                    <span class="tab-icon">📊</span>
+                    Dashboard
+                </button>
+                <button class="tab-btn" data-tab="monitoring">
+                    <span class="tab-icon">📡</span>
+                    Monitoring
+                </button>
+                <button class="tab-btn" data-tab="alerts">
+                    <span class="tab-icon">🚨</span>
+                    Alerts
+                </button>
+                <button class="tab-btn" data-tab="analytics">
+                    <span class="tab-icon">📈</span>
+                    Analytics
+                </button>
+                <button class="tab-btn" data-tab="settings">
+                    <span class="tab-icon">⚙️</span>
+                    Settings
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Dashboard Tab -->
+            <div class="tab-content active" id="dashboard">
+                <div class="dashboard-grid">
+                    <!-- Threat Overview Cards -->
+                    <div class="overview-cards">
+                        <div class="card threat-card">
+                            <div class="card__body">
+                                <h3>Active Threats</h3>
+                                <div class="threat-number" id="activeThreatCount">3</div>
+                                <div class="threat-breakdown">
+                                    <div class="threat-item high">High: <span id="highThreats">1</span></div>
+                                    <div class="threat-item medium">Medium: <span id="mediumThreats">2</span></div>
+                                    <div class="threat-item low">Low: <span id="lowThreats">0</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card weather-card">
+                            <div class="card__body">
+                                <h3>Weather Status</h3>
+                                <div class="weather-info" id="weatherInfo">
+                                    <div class="weather-temp">32°C</div>
+                                    <div class="weather-desc">Partly Cloudy</div>
+                                    <div class="weather-details">
+                                        <span>💨 25 km/h</span>
+                                        <span>💧 78%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card population-card">
+                            <div class="card__body">
+                                <h3>Population at Risk</h3>
+                                <div class="population-number" id="populationAtRisk">150,000</div>
+                                <div class="population-trend">↑ 12% from yesterday</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Map -->
+                    <div class="map-container">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Coastal Regions Map</h3>
+                                <div class="map-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-color high"></div>
+                                        <span>High Risk</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color medium"></div>
+                                        <span>Medium Risk</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color low"></div>
+                                        <span>Low Risk</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card__body">
+                                <div class="map-view" id="coastalMap">
+                                    <div class="region-marker high" data-region="region_003" style="top: 60%; left: 20%;">
+                                        <div class="marker-pulse"></div>
+                                        <div class="marker-label">Goa Beaches</div>
+                                    </div>
+                                    <div class="region-marker medium" data-region="region_001" style="top: 40%; left: 35%;">
+                                        <div class="marker-pulse"></div>
+                                        <div class="marker-label">Mumbai Coast</div>
+                                    </div>
+                                    <div class="region-marker low" data-region="region_002" style="top: 70%; left: 60%;">
+                                        <div class="marker-pulse"></div>
+                                        <div class="marker-label">Chennai Marina</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Alerts -->
+                    <div class="alerts-panel">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Active Alerts</h3>
+                                <button class="btn btn--sm btn--primary" id="refreshAlerts">Refresh</button>
+                            </div>
+                            <div class="card__body">
+                                <div class="alerts-list" id="activeAlertsList">
+                                    <!-- Dynamic content will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monitoring Tab -->
+            <div class="tab-content" id="monitoring">
+                <div class="monitoring-grid">
+                    <div class="sensor-cards">
+                        <h2>Sensor Data</h2>
+                        <div class="sensors-grid" id="sensorsGrid">
+                            <!-- Dynamic sensor cards will be populated here -->
+                        </div>
+                    </div>
+
+                    <div class="weather-monitoring">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Weather Patterns</h3>
+                                <div class="monitoring-controls">
+                                    <select class="form-control" id="regionSelect">
+                                        <option value="all">All Regions</option>
+                                        <option value="Mumbai Coast">Mumbai Coast</option>
+                                        <option value="Chennai Marina">Chennai Marina</option>
+                                        <option value="Goa Beaches">Goa Beaches</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card__body">
+                                <div class="weather-grid" id="weatherGrid">
+                                    <!-- Dynamic weather data will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="threat-detection">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Threat Detection</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="threat-types" id="threatTypes">
+                                    <!-- Dynamic threat types will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerts Tab -->
+            <div class="tab-content" id="alerts">
+                <div class="alerts-management">
+                    <div class="alerts-header">
+                        <h2>Alert Management</h2>
+                        <button class="btn btn--primary" id="createAlertBtn">Create New Alert</button>
+                    </div>
+
+                    <!-- Alert Creation Form -->
+                    <div class="card alert-form hidden" id="alertForm">
+                        <div class="card__header">
+                            <h3>Create New Alert</h3>
+                            <button class="btn btn--outline btn--sm" id="cancelAlert">Cancel</button>
+                        </div>
+                        <div class="card__body">
+                            <form id="newAlertForm">
+                                <div class="form-group">
+                                    <label class="form-label">Alert Type</label>
+                                    <select class="form-control" id="alertType" required>
+                                        <option value="">Select Alert Type</option>
+                                        <option value="Storm Surge Warning">Storm Surge Warning</option>
+                                        <option value="Coastal Erosion Alert">Coastal Erosion Alert</option>
+                                        <option value="Pollution Alert">Pollution Alert</option>
+                                        <option value="Cyclonic Activity">Cyclonic Activity</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Region</label>
+                                    <select class="form-control" id="alertRegion" required>
+                                        <option value="">Select Region</option>
+                                        <option value="Mumbai Coast">Mumbai Coast</option>
+                                        <option value="Chennai Marina">Chennai Marina</option>
+                                        <option value="Goa Beaches">Goa Beaches</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Severity</label>
+                                    <select class="form-control" id="alertSeverity" required>
+                                        <option value="">Select Severity</option>
+                                        <option value="LOW">Low</option>
+                                        <option value="MEDIUM">Medium</option>
+                                        <option value="HIGH">High</option>
+                                        <option value="CRITICAL">Critical</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Expected Impact</label>
+                                    <textarea class="form-control" id="alertImpact" rows="3" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Recommended Actions</label>
+                                    <textarea class="form-control" id="alertActions" rows="3" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn--primary">Create Alert</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Alert History -->
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Alert History</h3>
+                            <div class="alert-filters">
+                                <select class="form-control" id="severityFilter">
+                                    <option value="">All Severities</option>
+                                    <option value="LOW">Low</option>
+                                    <option value="MEDIUM">Medium</option>
+                                    <option value="HIGH">High</option>
+                                    <option value="CRITICAL">Critical</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card__body">
+                            <div class="alerts-table-container">
+                                <table class="alerts-table" id="alertsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Time</th>
+                                            <th>Type</th>
+                                            <th>Region</th>
+                                            <th>Severity</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="alertsTableBody">
+                                        <!-- Dynamic content will be populated here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div class="tab-content" id="analytics">
+                <div class="analytics-dashboard">
+                    <h2>Analytics & Insights</h2>
+                    
+                    <div class="analytics-grid">
+                        <div class="card chart-card">
+                            <div class="card__header">
+                                <h3>Threat Trends (Last 7 Days)</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="chart-container" style="position: relative; height: 300px;">
+                                    <canvas id="threatTrendsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card chart-card">
+                            <div class="card__header">
+                                <h3>Response Time Analysis</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="chart-container" style="position: relative; height: 300px;">
+                                    <canvas id="responseTimeChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card stats-card">
+                            <div class="card__header">
+                                <h3>Key Metrics</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="stats-grid" id="keyMetrics">
+                                    <!-- Dynamic stats will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card prediction-card">
+                            <div class="card__header">
+                                <h3>Predictive Insights</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="predictions" id="predictions">
+                                    <!-- Dynamic predictions will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-content" id="settings">
+                <div class="settings-panel">
+                    <h2>Settings</h2>
+                    
+                    <div class="settings-grid">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Notification Preferences</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="settings-form">
+                                    <div class="form-group">
+                                        <label class="form-label">Alert Notifications</label>
+                                        <div class="checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="emailNotifications" checked>
+                                                Email Notifications
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="smsNotifications" checked>
+                                                SMS Notifications
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="pushNotifications" checked>
+                                                Push Notifications
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Minimum Alert Severity</label>
+                                        <select class="form-control" id="minSeverity">
+                                            <option value="LOW">Low</option>
+                                            <option value="MEDIUM" selected>Medium</option>
+                                            <option value="HIGH">High</option>
+                                            <option value="CRITICAL">Critical</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Display Preferences</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="settings-form">
+                                    <div class="form-group">
+                                        <label class="form-label">Theme</label>
+                                        <select class="form-control" id="themeSelect">
+                                            <option value="auto">Auto (System)</option>
+                                            <option value="light">Light</option>
+                                            <option value="dark">Dark</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Data Refresh Interval</label>
+                                        <select class="form-control" id="refreshInterval">
+                                            <option value="5">5 seconds</option>
+                                            <option value="10" selected>10 seconds</option>
+                                            <option value="30">30 seconds</option>
+                                            <option value="60">1 minute</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>System Configuration</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="settings-form">
+                                    <div class="form-group">
+                                        <label class="form-label">API Endpoint</label>
+                                        <input type="url" class="form-control" id="apiEndpoint" value="https://api.coastalguard.com/v1">
+                                        <div class="form-group">
+                                            <label class="form-label">API Key</label>
+                                            <input type="text" class="form-control" id="apiKeyInput" placeholder="Enter your API key">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Backup Frequency</label>
+                                        <select class="form-control" id="backupFreq">
+                                            <option value="daily" selected>Daily</option>
+                                            <option value="weekly">Weekly</option>
+                                            <option value="monthly">Monthly</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="settings-actions">
+                                        <button class="btn btn--primary" id="saveSettings">Save Settings</button>
+                                        <button class="btn btn--outline" id="resetSettings">Reset to Defaults</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Region Details Modal -->
+    <div class="modal hidden" id="regionModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Region Details</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
