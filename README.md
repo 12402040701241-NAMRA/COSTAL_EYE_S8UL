@@ -30,10 +30,9 @@ The Coastal Threat Alert System is a comprehensive web-based platform designed t
 ---
 ## Project Structure
 -/CoastalThreatAlertSystem
-│
-├── index.html # Main HTML page defining UI layout
-├── style.css # CSS styles and themes
-└── app.js # JavaScript application logic and data handling
+-├── index.html # Main HTML page defining UI layout
+-├── style.css # CSS styles and themes
+-└── app.js # JavaScript application logic and data handling
 ---
 ## Usage
 - Use the top navigation tabs to explore the dashboard, monitoring data, alerts, analytics, and settings.
