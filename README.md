@@ -1,4 +1,5 @@
-# COSTAL_EYE_S8UL
+# COSTAL_EYE_S8UL **{open index.html for website visiting}**
+
 # Coastal Threat Alert System
 ## Project Overview
 The Coastal Threat Alert System is a comprehensive web-based platform designed to provide early warnings and real-time alerts for various coastal threats such as storm surges, coastal erosion, pollution, and cyclonic activity. It integrates data from sensors, weather forecasts, and historical patterns to help disaster management teams, coastal city governments, environmental NGOs, fisherfolk, and civil defense teams safeguard lives, property, and vital blue carbon habitats.
